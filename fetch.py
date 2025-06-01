@@ -1,0 +1,17 @@
+from datetime import datetime
+import requests
+import os
+current_date = datetime.now().strftime("%Y-%m-%d")
+
+url = f"https://spiele.spiegel.de/games/spiegel_Crosswords/js/data/levels/c003/{current_date}_9x9.json?_=1.14.112"
+
+folder = "spiegel"
+
+os.makedirs(folder, exist_ok=True)
+file_path = os.path.join(folder, f"{current_date}.json");
+
+response = requests.get(url);
+
+if response.status_code == 200:
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(response.text)
