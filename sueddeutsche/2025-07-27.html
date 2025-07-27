@@ -1,0 +1,3493 @@
+<!DOCTYPE html><html data-color-scheme="enable-dark-mode" lang="en"><head><meta charSet="UTF-8"/><title>Online-Rätsel</title><script type="text/javascript">window.cfg={"canvasBackgroundColor":"#ECEBE6","cellSize":50,"ArrowWidth":8,"ArrowLength":11,"ArrowFill":"#999999","ArrowStroke":"#999999","ArrowStrokeWidth":1,"ArrowDistance":4,"ArrowLength1":8,"ArrowLength2":4,"BorderWidthOuter":3,"BorderWidthInner":1,"BorderColorOuter":"#999999","BorderColorInner":"#999999","BorderWidthSparator":1,"BorderColorSparator":"#999999","CellColorActiveCC":"#ECEBE6","CellColorSelectedCC":"#ECEBE6","FontSizeCC":31.5,"FontColorCC":"#736868","FontColorErrorCC":"#FF0000","FontFamilyCC":"Archivo Narrow","FontWeightCC":"700","FontLeadingTopCC":5,"FontHeightCC":23,"FontLeadingBottomCC":8,"FontSizeDC":12,"FontColorDC":"#736868","FontFamilyDC":"Archivo Narrow","FontWeightDC":"700","FontLeadingTopDC":1,"FontHeightDC":10,"FontLeadingBottomDC":3,"CellPaddingLeft":1,"CellPaddingTop":1,"CellPaddingRight":1,"CellPaddingBottom":1,"CellPaddingSplitTop":1,"CellPaddingSplitBottom":1,"CellPaddingLineDistance":1,"FontSizeSolutionChar":12,"FontColorSolutionChar":"#736868","FontFamilySolutionChar":"Archivo Narrow","FontWeightSolutionChar":"700","FontSizeMessageBox":18,"FontColorMessageBox":"#000000","FontFamilyMessageBox":"Archivo Narrow","FontWeightMessageBox":"700","MessageBoxFill":"#E5E5E5","MessageBoxStroke":"#333333","MessageBoxStrokeWidth":1,"SolutionCircleColor":"#999999","SolutionCircleWidth":1,"FooterBarHeight":75,"FooterBarColor":"#ECEBE6","FooterBarStroke":"#999999","FooterBarStrokeWidth":1,"PlaceholderLeft":200,"PlaceholderTop":20,"PlaceholderCellSize":35,"PlaceholderSpaceMargin":15,"PlaceholderCellColor":"#FFFFFF","PlaceholderCellStrokeColor":"#E5E5E5","PlaceholderCellStrokeWidth":1,"PlaceholderSolutionCharFontSize":20,"PlaceholderSolutionCharFontColor":"#ADA5A3","PlaceholderSolutionCharFontFamily":"Archivo Narrow","PlaceholderSolutionCharFontWeight":"700","PlaceholderNumberFontSize":12,"PlaceholderNumberFontColor":"#ADA5A3","PlaceholderNumberFontFamily":"Archivo Narrow","PlaceholderNumberFontWeight":"700","CopyrightNumberFontFamily":"Archivo Narrow","CopyrightSolutionCharFontWeight":"700","CopyrightNumberFontSize":12,"CopyrightNumberFontColor":"#777777","customImages":[{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_leeren.svg","urlHover":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_leeren_hover.svg","left":10,"top":638,"width":35,"height":35,"callFunction":"clickBtnLeeren"},{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_fehler.svg","urlHover":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_fehler_hover.svg","left":55,"top":638,"width":35,"height":35,"callFunction":"clickBtnFehler"},{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_loesen.svg","urlHover":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_loesen_hover.svg","left":100,"top":638,"width":35,"height":35,"callFunction":"clickBtnLoesen"},{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_hilfe.svg","urlHover":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/btn_hilfe_hover.svg","left":145,"top":638,"width":35,"height":35,"linkTarget":"https://www.sueddeutsche.de/service/hilfe-das-sueddeutschede-kreuzwortraetsel-1.1320202"},{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/bild1.jpg","left":2,"top":2,"width":153,"height":153,"linkTarget":"https://www.sueddeutsche.de/raetsel/sudoku/spielen"},{"url":"https://www.sueddeutsche.de/szde-assets/szde-mini-apps/img/bild2.jpg","left":513,"top":513,"width":203,"height":101,"linkTarget":"https://www.sueddeutsche.de/thema/Spiele"}]}</script><script type="text/javascript">(function(ratefux, undefined)
+{
+    var a112 = null;
+    var a153 = null;
+
+    var a147 = 0;
+    var a150 = 1;
+    var a151 = 2;
+    var a157 = 3;
+
+    var a83 = {x: -1, y: -1};
+    var a37 = true;
+
+    var Var_msgSolvedEnabled = true;
+    var Var_msgSolvedWithErrorsEnabled = true;
+
+    var a41 = 0;
+    var a64 = 1;
+    var a66 = 2;
+    var a31 = 3;
+
+    var a154 = 0;
+    var a156 = 1;
+    var a155 = 2;
+    var a149 = 3;
+    var a148 = 4;
+    var a152 = 5;
+    var a158 = 6;
+
+    var Var_AllBorders = [];
+    var Var_AllCells = [];
+    var Var_AllTextDC = [];
+    var Var_AllTextCC = [];
+    var Var_AllArrows = [];
+    var Var_AllCircles = [];
+    var Var_AllCirclesText = [];
+    var Var_AllSplitters = [];
+
+    var a103 = cfg.cellSize;
+    var Var_Zoom = 1;
+
+    var a122 = {
+        width: cfg.ArrowWidth,
+        length: cfg.ArrowLength,
+        fill: cfg.ArrowFill,
+        stroke: cfg.ArrowStroke,
+        strokeWidth: cfg.ArrowStrokeWidth,
+        distance: cfg.ArrowDistance,
+        length1: cfg.ArrowLength1,
+        length2: cfg.ArrowLength2
+    };
+
+    var a39 = {
+        stroke: cfg.SolutionCircleColor,
+        strokeWidth: cfg.SolutionCircleWidth,
+    };
+
+    var a111 = {
+        widthOuter: cfg.BorderWidthOuter,
+        widthInner: cfg.BorderWidthInner,
+        colorOuter: cfg.BorderColorOuter,
+        colorInner: cfg.BorderColorInner,
+        widthSparator: cfg.BorderWidthSparator,
+        colorSeparator: cfg.BorderColorSparator,
+    };
+
+    var a84 =
+        {
+            activeCC: cfg.CellColorActiveCC,
+            selectedCC: cfg.CellColorSelectedCC
+        };
+
+    var a113 = {
+        fontSize: cfg.FontSizeCC,
+        color: cfg.FontColorCC,
+        errorColor: cfg.FontColorErrorCC,
+        fontFamily: cfg.FontFamilyCC,
+        fontWeight: cfg.FontWeightCC
+    };
+
+    var a114 = {
+        fontSize: cfg.FontSizeDC,
+        color: cfg.FontColorDC,
+        fontFamily: cfg.FontFamilyDC,
+        fontWeight: cfg.FontWeightDC
+    };
+
+    var a170 = {
+        fontSize: cfg.CopyrightNumberFontSize,
+        color: cfg.CopyrightNumberFontColor,
+        fontFamily: cfg.CopyrightNumberFontFamily,
+        fontWeight: cfg.CopyrightSolutionCharFontWeight
+    };
+
+    var a32 = {
+        fontSize: cfg.FontSizeSolutionChar,
+        color: cfg.FontColorSolutionChar,
+        fontFamily: cfg.FontFamilySolutionChar,
+        fontWeight: cfg.FontWeightSolutionChar
+    };
+
+    var a68 = {
+        left: cfg.CellPaddingLeft,
+        top: cfg.CellPaddingTop,
+        right: cfg.CellPaddingRight,
+        bottom: cfg.CellPaddingBottom,
+        splitTop: cfg.CellPaddingSplitTop,
+        splitBottom: cfg.CellPaddingSplitBottom,
+        lineDistance: cfg.CellPaddingLineDistance
+    };
+
+    var a96 = {
+        height: cfg.FooterBarHeight,
+        color: cfg.FooterBarColor,
+        stroke: cfg.FooterBarStroke,
+        strokeWidth: cfg.FooterBarStrokeWidth,
+        fabricRect: null
+    };
+
+    var a65 = {
+        left: cfg.PlaceholderLeft,
+        top: cfg.PlaceholderTop,
+        cellSize: cfg.PlaceholderCellSize,
+        spaceMargin: cfg.PlaceholderSpaceMargin,
+        cellColor: cfg.PlaceholderCellColor,
+        cellStrokeColor: cfg.PlaceholderCellStrokeColor,
+        cellStrokeWidth: cfg.PlaceholderCellStrokeWidth,
+        solutionCharFontSize: cfg.PlaceholderSolutionCharFontSize,
+        solutionCharFontColor: cfg.PlaceholderSolutionCharFontColor,
+        solutionCharFontFamily: cfg.PlaceholderSolutionCharFontFamily,
+        solutionCharFontWeight: cfg.PlaceholderSolutionCharFontWeight,
+        numberFontSize: cfg.PlaceholderNumberFontSize,
+        numberFontColor: cfg.PlaceholderNumberFontColor,
+        numberFontFontFamily: cfg.PlaceholderNumberFontFamily,
+        numberFontFontWeight: cfg.PlaceholderNumberFontWeight
+    };
+
+    var a43 = null;
+    var a44 = null;
+    var a169 = 'D35gTE93mShE';
+    var Var_Serialnumber = '\u00A9 RateFUX';
+
+    var a125 = a168(a169, '\u00E0\u006D\u00D4\u00FC\u00DD\u0090\u00C1\u0110\u00E5\u009B\u011A');
+
+    var a4 = [];
+    var a85 = [];
+    var a123 = 0;
+    var a67 = 0;
+    var a59 = 0;
+    var a82 = false;
+
+    var a171 = null;
+
+    var a116ID = 'DAA4B1FE-2496-4AE4-97B3-2D9F8D843DD5';
+
+    var a116 =
+    [
+[
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D4\u0041\u00F3\u00CE\u00F9\u00B9\u0124\u0135\u00C7\u00B3\u013A\u00A8\u013D\u0075\u0078',
+lineCount: 2,
+startOffest: a149
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00CC',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DD\u004C\u00FD\u0108\u0128\u006B\u00C3\u012E\u00C4\u00A1\u00E8\u00A9\u013E\u0070\u007F\u0108\u0049\u00CA\u0054\u007C\u0054',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00DD\u004C\u00FD\u0108\u0128\u006B\u00CB\u013E\u00CC\u00C0\u0137\u0099\u0129\u0064\u0076\u0113',
+lineCount: 2,
+startOffest: a149
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00DA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DB\u0047\u00E4\u00DE\u00F6\u00B0\u00E8\u013D\u00D7\u00B8\u0130\u00A7\u0136\u005E\u0076\u0113\u0057\u00C4\u0049\u006D\u004F',
+lineCount: 3,
+startOffest: a156
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DC\u004D\u00F4\u00CD\u00F0\u0068\u00F3\u012B\u00D0\u00A8\u013F\u00B2\u0128\u00B8\u006D\u0114\u0050\u00CE\u0041\u0070',
+lineCount: 3,
+startOffest: a149
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CE\u005C\u00FF\u00CD\u00EF\u00BF\u00EC\u013B\u00D7\u00BB\u0128\u0075\u0109\u00B5\u0045\u00CF',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u0100\u0049\u00EF\u0108\u0128\u00B7\u00C5\u013E\u00C5\u00B5\u0130',
+lineCount: 2,
+startOffest: a149
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00E0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00F7\u005C\u00F9\u00C9\u00EA\u0065\u00F3\u010A\u00CF\u00A2\u0124\u00B6\u0121\u0075\u0064\u0106\u0058',
+lineCount: 2,
+startOffest: a155
+},
+{
+question: '\u00CC\u0047\u00E6\u00C8\u00FD\u00A8\u00EC\u00E9\u00DD\u007E\u0137\u0093\u0121\u006F\u006B\u0108\u005F\u00D1\u0048\u0066\u0045',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 6,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CF\u005E\u00E6\u00CD\u00E9\u00C0\u00E1\u0130\u00D7\u00A6\u00E5\u0075\u0103\u0080\u007A\u010E\u005D\u00D8\u0053',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00E9\u0048\u00F1\u00CD\u0131\u00B7\u00ED\u013B\u00CC\u00A7\u012A\u00BD\u013E',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00D7',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D7',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00F4\u0041\u00F5\u00C2\u00EA\u00B7\u00EB\u013E\u00C5\u00B9\u0130\u00B9',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00F9\u0041\u00FA\u010A\u00CA\u00AC\u00E1\u0133',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 5,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D9\u0042\u00E6\u00CD\u00F4\u0068\u00F3\u013C\u00DF\u00B3\u012D\u00B3\u012D\u0077\u00B1\u0103\u005F\u00CC\u005B\u005B\u0055\u0061\u00C3\u00FA\u00D4\u00AB\u00D5\u00EA\u00B5\u0122\u0124\u0129\u011B\u010C\u007C',
+lineCount: 4,
+startOffest: a155
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CA\u004D\u00FF\u00C6\u013E\u00AF\u00EC\u013C\u00D7\u0092\u0126\u00B4\u012D\u0075\u0064',
+lineCount: 2,
+startOffest: a156
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DD\u004C\u00FD\u0108\u0128\u00B7\u00E1\u0128\u00D9\u00A5\u0130\u00B4\u00E8\u0067\u005C\u0113\u0055\u00CD\u0044',
+lineCount: 3,
+startOffest: a158
+},
+{
+question: '\u00DC\u0049\u00E6\u00CC\u00EA\u00A6\u00E1',
+lineCount: 1,
+startOffest: a156
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CF\u004D\u00F3\u0105\u00E2\u00A8\u00F0\u0127\u00C5\u00A1\u00E8\u00A9\u0126\u0076\u0079\u010F',
+lineCount: 3,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D6',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00FC\u0046\u006C\u00DB\u00EA\u00B0\u00FD\u0127\u0107\u00B0\u0128\u00A2\u013C\u0078\u0076\u010D\u0056',
+lineCount: 2,
+startOffest: a156
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+}
+],
+[
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D7',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D6\u0049\u00FC\u00CC\u00EA\u00A6\u00E1\u0135\u0057\u00B2\u0130\u00A7\u00EA\u005C',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00CF\u005A\u00FF\u00DE\u00E8\u00B0\u00E1\u00E6\u00D7\u00B9\u00B7\u00BB\u013B\u006F\u007D\u0106\u004A',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 11,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DD\u005D\u00E5\u00DC\u00E9\u00AD\u012F\u012D\u00D0\u00A2\u0137\u0083\u012D\u0069\u0068\u0116\u0056\u0110\u005B\u006E\u0046\u0074\u00D7\u00E4\u00C8',
+lineCount: 3,
+startOffest: a155
+},
+{
+question: '\u00D2\u0049\u00E3\u00CC\u0100\u00AC\u00FC\u0126',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 2,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00F9\u0041\u00E5\u00CD\u00F0\u00A5\u00EC\u013B\u00D7\u0081\u012A\u00BD\u0125\u0074\u0076\u00CE\u0048\u00C7\u0044\u006C\u004D\u006F\u00C1\u00E7',
+lineCount: 3,
+startOffest: a156
+},
+{
+question: '\u00E0\u00D6\u00E6\u00CE\u00F9',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u012C\u0088\u0138\u00CF\u00F0\u00A4\u00EC\u012C\u00C3\u007E\u0137\u0097\u013D\u007A\u0079\u0114\u0050\u00C4\u0045\u006D',
+lineCount: 2,
+startOffest: a156
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a64,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D6',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00EF\u005E\u00F3\u00C2\u00F9\u00A5\u00EB\u012E\u00D9\u00B0\u0109\u00B2\u0121\u007D\u0072\u010D\u0058\u00D2\u0055\u007D\u0047',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00D5\u005E\u00F7\u00C6\u00F5\u00B0\u00E1\u0135\u0103\u00A0\u012F\u00A8\u013A\u00B5\u00BA',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 10,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00FD\u005B\u00E4\u00DC\u00F3\u00A5\u00E2\u0126\u0105\u00B0\u0109\u00B2\u012F\u0069\u007A\u0107\u005E',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00FB\u004D\u013B\u00D6\u00EF\u00AA\u00E7\u0125\u00C6\u00A1\u013A\u00B2\u0128',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C8',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D7\u0050\u00EE\u0108\u0131\u0091\u0121\u00F3\u00D7\u00A0\u0130\u00A3\u012D\u0069\u00BE\u011D\u0051\u00D8\u0056\u006D\u004F',
+lineCount: 3,
+startOffest: a155
+},
+{
+question: '\u00D4\u004D\u00E3\u00C2\u00F9\u00A4\u00FB',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CC',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D1',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00FC\u005C\u00F7\u00C8\u00E8\u0065\u0135\u0135\u00FA\u00B1\u0123\u00A7\u012D\u0074',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00FD\u005D\u00E5\u0105\u00E2\u00BA\u00FF\u013B\u00D0\u00B1\u0123\u00B2\u0128',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 8,
+solution: '\u00DB',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00D2',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CC',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DB\u004D\u00FC\u00CE\u00EF\u00AA\u00E7\u012E\u00C4\u00BE',
+lineCount: 1,
+startOffest: a156
+},
+{
+question: '\u00C9\u007B\u013B\u00FC\u00E9\u00A5\u00EB\u00E6\u00D7\u00B6\u0140\u00BB\u0123\u007E\u0076\u00CE\u0048\u00D2\u0044\u0066\u004D\u0073\u00C1\u00E6\u00C2\u0062\u00DD',
+lineCount: 3,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 1,
+solution: '\u00E0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CB\u0049\u00F1\u00CD\u00F4\u00BF\u00EC\u0122\u00C7',
+lineCount: 1,
+startOffest: a156
+},
+{
+question: '\u00EC\u004D\u00E6\u00C9\u00F2\u00BF\u00EC\u013D\u0111\u00B0\u011F\u00A7\u013D\u006B\u0061\u0106\u0056\u0110\u005B\u007B\u0051\u0069\u00D8\u00F8\u00C6',
+lineCount: 3,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D7\u0049\u00E3\u00D0\u0131\u00B7\u00E4\u012A\u00C5\u00BE\u013A\u007A\u0136\u006A\u0061\u0113\u005B\u00C2\u004F\u006D\u009B\u007E\u00CC\u00E9\u00D6\u0074\u00CE',
+lineCount: 4,
+startOffest: a155
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DB\u0046\u00FF\u00CD\u00FA\u0068\u00F3\u0126\u00CC\u010D\u0130\u00BB',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00CB\u0047\u00FC\u00C6\u00EF\u00A6\u00FD\u013D\u00D0',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 9,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DB',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D2\u0049\u00FA\u00CE\u0131\u00B7\u00FE\u013D\u00D9\u00B7\u0124\u00A1\u00E5\u0067\u007E\u0102\u0059\u00CB\u0053',
+lineCount: 3,
+startOffest: a156
+},
+{
+question: '\u00F5\u005E\u00F7\u00C6\u0134\u0071\u012F\u0121\u00D0\u00BB\u0127\u00BE\u012F',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 7,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00DA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DD',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00CB\u004D\u00FC\u00DE\u00F3\u00B9\u00EA\u012A\u0108\u00B0\u0125\u00BE\u013B\u007C\u0065\u010A\u0055\u00CD\u005B\u00A2\u0062\u0064\u00C9\u0124\u010A',
+lineCount: 3,
+startOffest: a156
+},
+{
+question: '\u00DD\u005D\u00E5\u00CC\u00F2\u00A4\u00EE\u0124',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00DF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D6',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00F7\u005D\u00FC\u00DE\u00F5\u00BA\u00EE\u0121\u00D0\u00A2\u0137\u0097\u013C\u007C\u0066\u0104\u0054',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 4,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00C9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D9\u005C\u00F6\u00CF\u00E9\u00BF\u0124\u0135\u00DF\u00A2\u00AF\u00B4\u012D\u0069',
+lineCount: 2,
+startOffest: a156
+},
+{
+question: '\u00DC\u005C\u00F3\u00DD\u00FA\u00B0\u00E1\u00E6\u00D7\u00A2\u0140\u00B3',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D6',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DC\u005C\u00F3\u00DD\u00F4\u00AF\u00F3\u012D\u00D0\u00A2\u00EB\u0085\u013D\u006B\u0061\u0106\u0048\u0106\u0065\u0069\u0053\u0064\u00CB\u00E9\u0108',
+lineCount: 3,
+startOffest: a155
+},
+{
+question: '\u00FA\u00CE\u00FA\u0108\u013E\u0084\u00E1\u013C\u00D0\u00C0',
+lineCount: 1,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D1',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00D9\u0046\u00F6\u00CD\u0131\u00B7\u00F5\u013E\u00CD\u00C0\u0140\u00A8\u013B',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D5',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00CF',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+}
+],
+[
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00D7',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a151,
+questions:
+[
+{
+question: '\u00DD\u005D\u00F2\u00DE\u00F0\u012F\u00EA\u012E\u00D7\u00B7\u0139\u00A1\u012D\u0074\u007D\u0106\u0056',
+lineCount: 2,
+startOffest: a148
+}
+],
+fabricRect: null,
+fillColor: '#FEEDE1'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D3',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a66,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 3,
+solution: '\u00DA',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D9',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D0',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a150,
+connectionInfo: a31,
+solutionIndex: 0,
+solution: '\u00D4',
+backup: null,
+fabricRect: null,
+fabricText: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+},
+{
+cellType: a147,
+fabricRect: null,
+fillColor: '#FFFFFF'
+}
+]
+];
+
+
+    var a131 = a116[0].length;
+    var a130 = a116.length;
+
+    function a28(a141, a142)
+    {
+        var a35 = a111.widthOuter + a141 * a111.widthInner;
+        var a55 = a141 * a103 + a35;
+
+        var Var_offsetVerticalY = a111.widthOuter + a142 * a111.widthInner;
+        var a56 = a142 * a103 + Var_offsetVerticalY;
+
+        var a117 =
+            {
+                x: a55,
+                y: a56
+            };
+
+        return a117;
+    }
+
+    function a53()
+    {
+        var a11 = 0;
+        var myY = 0;
+        for (var y = 0; y <= a131; y++)
+        {
+            var tmpStrokeWidth = y > 0 && y < a131 ? a111.widthInner : a111.widthOuter;
+            var tmpStroke = y > 0 && y < a131 ? a111.colorInner : a111.colorOuter;
+            if (y == 0) {
+                myY = a111.widthOuter/2;
+            }
+            else if (y == a131) {
+                myY = y * a103+a111.widthOuter+(y-1)*a111.widthInner + (a111.widthOuter/2);
+            } else {
+                myY = y * a103+a111.widthOuter+(y-1)*a111.widthInner + (a111.widthInner/2);
+            }
+            var a12 = new fabric.Line(
+                [0, myY, (a130 * a103) + (a130-1)*a111.widthInner + (2*a111.widthOuter), myY],
+                {
+                    originX: 'center',
+                    originY: 'center',
+                    stroke: tmpStroke,
+                    strokeWidth: tmpStrokeWidth,
+                    selectable: false
+                }
+            );
+            a112.add(a12);
+        }
+
+        var myX = 0;
+        for (var x = 0; x <= a130; x++)
+        {
+            tmpStrokeWidth = x > 0 && x < a130 ? a111.widthInner : a111.widthOuter;
+            tmpStroke = x > 0 && x < a130 ? a111.colorInner : a111.colorOuter;
+            if (x == 0) {
+                myX = a111.widthOuter / 2;
+            }
+            else if (x == a130) {
+                myX = x * a103+a111.widthOuter+(x-1)*a111.widthInner + a111.widthOuter/2;
+            } else {
+                myX = x * a103+a111.widthOuter+(x-1)*a111.widthInner + a111.widthInner/2;
+            }
+            a12 = new fabric.Line(
+                [myX, 0, myX, (a131 * a103) + (a131-1)*a111.widthInner + (2*a111.widthOuter)],
+                {
+                    originX: 'center',
+                    originY: 'center',
+                    stroke: tmpStroke,
+                    strokeWidth: tmpStrokeWidth,
+                    selectable: false
+                }
+            );
+            a112.add(a12);
+        }
+    }
+
+    function a77(a141, a142, a40, a21, a94)
+    {
+        var a106 = a28(a141, a142);
+
+        switch (a40)
+        {
+            case a156:
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x + a103,
+                        top: a106.y + (a21 / 2) + a94,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 90,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            case a155:
+                a112.add(
+                    new fabric.Polyline([
+                        {x: 0, y: 0},
+                        {x: a122.length1, y: 0},
+                        {x: a122.length1, y: a122.length2}
+                    ], {
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        left: a106.x + a103,
+                        top: a106.y + a122.distance + a94,
+                        fill: 'transparent',
+                        selectable: false
+                    })
+                );
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x + a103 + a122.length1,
+                        top: a106.y + a122.length2 + a122.distance + a94,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 180,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            case a149:
+                a112.add(
+                    new fabric.Polyline([
+                        {x: 0, y: 0},
+                        {x: 0, y: a122.length1},
+                        {x: a122.length2, y: a122.length1}
+                    ], {
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        left: a106.x + a122.distance,
+                        top: a106.y + a103,
+                        fill: 'transparent',
+                        selectable: false
+                    })
+                );
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x + a122.length2 + a122.distance,
+                        top: a106.y + a103 + a122.length1,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 90,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            case a148:
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x + (a103 / 2),
+                        top: a106.y + a103,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 180,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            case a152:
+                a112.add(
+                    new fabric.Polyline([
+                        {x: 0, y: 0},
+                        {x: -a122.length1, y: 0},
+                        {x: -a122.length1, y: a122.length2}
+                    ], {
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        left: a106.x - a122.length1,
+                        top: a106.y + a122.distance + a94,
+                        fill: 'transparent',
+                        selectable: false
+                    })
+                );
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x - a122.length1,
+                        top: a106.y + a122.length2 + a122.distance + a94,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 180,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            case a158:
+                a112.add(
+                    new fabric.Polyline([
+                        {x: 0, y: 0},
+                        {x: 0, y: -a122.length1},
+                        {x: a122.length2, y: -a122.length1}
+                    ], {
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        left: a106.x + a122.distance,
+                        top: a106.y - a122.length1,
+                        fill: 'transparent',
+                        selectable: false
+                    })
+                );
+                a112.add(
+                    new fabric.Triangle({
+                        left: a106.x + a122.length2 + a122.distance,
+                        top: a106.y - a122.length1,
+                        width: a122.width,
+                        height: a122.length,
+                        originX: 'center',
+                        originY: 'bottom',
+                        angle: 90,
+                        fill: a122.fill,
+                        stroke: a122.stroke,
+                        strokeWidth: a122.strokeWidth,
+                        selectable: false
+                    })
+                );
+                break;
+            default:
+                alert('Error');
+        }
+    }
+
+    function a60()
+    {
+        for (var y = 0; y < a131; y++)
+        {
+            for (var x = 0; x < a130; x++)
+            {
+                if (a116[x][y].cellType == a151)
+                {
+                    if (a116[x][y].questions.length == 2)
+                    {
+                        var a119 = a116[x][y].questions[0].lineCount / (a116[x][y].questions[0].lineCount + a116[x][y].questions[1].lineCount);
+                        a77(x, y, a116[x][y].questions[0].startOffest, a119 * a103, 0);
+                        a77(x, y, a116[x][y].questions[1].startOffest, a103 - (a119 * a103), a119 * a103);
+                    }
+                    else
+                    {
+                        a77(x, y, a116[x][y].questions[0].startOffest, a103, 0)
+                    }
+                }
+            }
+        }
+
+    }
+
+    function Func_selectWord(a141, a142, a20, a81)
+    {
+        var a98;
+        if (a20)
+        {
+            a98 = {x: a141, y: a142};
+            while ((a98.x <= a130 - 1) && a116[a98.x][a98.y].cellType == a150)
+            {
+                a116[a98.x][a98.y].fabricRect.setColor(
+                    a81 ? a84.selectedCC : a116[a98.x][a98.y].fillColor
+                );
+                a98.x++;
+            }
+            a98 = {x: a141, y: a142};
+            while ((a98.x >= 0) && a116[a98.x][a98.y].cellType == a150)
+            {
+                a116[a98.x][a98.y].fabricRect.setColor(
+                    a81 ? a84.selectedCC : a116[a98.x][a98.y].fillColor
+                );
+                a98.x--;
+            }
+        }
+        else
+        {
+            a98 = {x: a141, y: a142};
+            while ((a98.y <= a131 - 1) && a116[a98.x][a98.y].cellType == a150)
+            {
+                a116[a98.x][a98.y].fabricRect.setColor(
+                    a81 ? a84.selectedCC : a116[a98.x][a98.y].fillColor
+                );
+                a98.y++;
+            }
+            a98 = {x: a141, y: a142};
+            while ((a98.y >= 0) && a116[a98.x][a98.y].cellType == a150)
+            {
+                a116[a98.x][a98.y].fabricRect.setColor(
+                    a81 ? a84.selectedCC : a116[a98.x][a98.y].fillColor
+                );
+                a98.y--;
+            }
+        }
+        if (a81)
+        {
+            a116[a141][a142].fabricRect.fill = a84.activeCC;
+        }
+    }
+
+    function updateLetters(a61)
+    {
+        for (var y = 0; y < a131; y++)
+        {
+            for (var x = 0; x < a130; x++)
+            {
+                if (a116[x][y].cellType == a150)
+                {
+                    a116[x][y].fabricText.set('fill', a61);
+                }
+            }
+        }
+    }
+
+    function Func_setLetter(a141, a142, a62)
+    {
+        if (a116[a141][a142].cellType == a150)
+        {
+            a62 = a62.toUpperCase();
+            var a97 = a116[a141][a142].fabricText.get('text');
+            var a51 = ((a97 != a116[a141][a142].solution) && (a97 != ''));
+
+            if ((a97 == '') && (a62 != ''))
+            {
+                a67++;
+            }
+            else if ((a97 != '') && (a62 == ''))
+            {
+                a67--;
+            }
+
+            a116[a141][a142].fabricText.set('text', a62);
+            if (a116[a141][a142].solutionIndex > 0)
+            {
+                a85[a116[a141][a142].solutionIndex-1].solutionChar.set('text', a62);
+            }
+
+            var a50 = ((a62 != a116[a141][a142].solution) && (a62 != ''));
+            if (a51 && !a50)
+            {
+                a59--;
+            }
+            else if (!a51 && a50)
+            {
+                a59++;
+            }
+
+            if (a82)
+            {
+                if (a50)
+                {
+                    a116[a141][a142].fabricText.set('fill', a113.errorColor);
+                }
+                else
+                {
+                    a116[a141][a142].fabricText.set('fill', a113.color);
+                }
+            }
+
+
+            if (a67 == a123)
+            {
+                if (a59 == 0)
+                {
+                    if (Var_msgSolvedEnabled) {
+                        Func_showMessage('Gratulation\nSie haben das Rätsel\nvollständig gelöst');
+                    }
+                }
+                else
+                {
+                    if (Var_msgSolvedWithErrorsEnabled) {
+                        Func_showMessage('Das Rätsel ist zwar vollständig gelöst,\naber leider sind noch Fehler vorhanden');
+                    }
+                }
+            }
+        }
+    }
+
+    function Func_keyPress(a100, a120, a80, a92)
+    {
+        a153.value = ' ';
+        var a135 = a83.x;
+        var a136 = a83.y;
+        if ((a92 >= 65) && (a92 <= 90))
+        {
+            Func_setLetter(a83.x, a83.y, a120);
+            if (a37)
+            {
+                if ((a83.x < (a130 - 1) && (a116[a83.x + 1][a83.y].cellType == a150)))
+                {
+                    Func_keyPress("", "ArrowRight", 0, 39);
+                }
+            }
+            else
+            {
+                if ((a83.y < (a131 - 1) && (a116[a83.x][a83.y + 1].cellType == a150)))
+                {
+                    Func_keyPress("", "ArrowDown", 0, 40);
+                }
+            }
+        }
+        else
+        {
+            if (a92 == 40)
+            {
+                do {
+                    a136 = a136 + 1;
+                    if (a136 > (a131 - 1)) a136 = 0;
+                } while (a116[a135][a136].cellType != a150);
+                if (a136 != a83.y) Func_clickXY(a135, a136);
+            }
+            else
+            {
+                if (a92 == 37)
+                {
+                    do {
+                        a135 = a135 - 1;
+                        if (a135 < 0) a135 = a130 - 1;
+                    } while (a116[a135][a136].cellType != a150);
+                    if (a135 != a83.x) Func_clickXY(a135, a136);
+                }
+                else
+                {
+                    if (a92 == 39)
+                    {
+                        do {
+                            a135 = a135 + 1;
+                            if (a135 > (a130 - 1)) a135 = 0;
+                        } while (a116[a135][a136].cellType != a150);
+                        if (a135 != a83.x) Func_clickXY(a135, a136);
+                    }
+                    else
+                    {
+                        if ((a92 == 32) || (a92 == 13))
+                        {
+                            Func_clickXY(a135, a136);
+                        }
+                        else
+                        {
+                            if (a92 == 46)
+                            {
+                                Func_setLetter(a83.x, a83.y, "");
+                            }
+                            else
+                            {
+                                if (a92 == 8)
+                                {
+                                    if (a37)
+                                    {
+                                        if ((a83.x > 0) && (a116[a83.x - 1][a83.y].cellType == a150))
+                                        {
+                                            Func_keyPress("", "ArrowLeft", 0, 37);
+                                            Func_keyPress("", "Delete", 0, 46);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if ((a83.y > 0) && (a116[a83.x][a83.y - 1].cellType == a150))
+                                        {
+                                            Func_keyPress("", "ArrowUp", 0, 38);
+                                            Func_keyPress("", "Delete", 0, 46);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (a92 == 38)
+                                    {
+                                        do {
+                                            a136 = a136 - 1;
+                                            if (a136 < 0) a136 = a131 - 1;
+                                        } while (a116[a135][a136].cellType != a150);
+                                        if (a136 != a83.y) Func_clickXY(a135, a136);
+                                    }
+                                    else
+                                    {
+                                        if (a92 == 36)
+                                        {
+                                            if (a37)
+                                            {
+                                                var x = a83.x;
+                                                while ((x >= 1) && (a116[x - 1][a83.y].cellType == a150))
+                                                {
+                                                    x--;
+                                                }
+                                                if (a83.x != x) Func_clickXY(x, a83.y);
+                                            }
+                                            else
+                                            {
+                                                var y = a83.y;
+                                                while ((y >= 1) && (a116[a83.x][y-1].cellType == a150))
+                                                {
+                                                    y--;
+                                                }
+                                                if (a83.y != y) Func_clickXY(a83.x, y);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (a92 == 35)
+                                            {
+                                                if (a37)
+                                                {
+                                                    var x = a83.x;
+                                                    while ((x < a130-1) && (a116[x + 1][a83.y].cellType == a150))
+                                                    {
+                                                        x++;
+                                                    }
+                                                    if (a83.x != x) Func_clickXY(x, a83.y);
+                                                }
+                                                else
+                                                {
+                                                    var y = a83.y;
+                                                    while ((y <= a131-1) && (a116[a83.x][y+1].cellType == a150))
+                                                    {
+                                                        y++;
+                                                    }
+                                                    if (a83.y != y) Func_clickXY(a83.x, y);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if ((a120 == 'ä') || (a120 == 'Ä'))
+                                                {
+                                                    if
+                                                    (
+                                                        (a37 && (a83.x < (a130 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x + 1][a83.y].cellType == a150)))
+                                                        || (!a37 && (a83.y < (a131 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x][a83.y + 1].cellType == a150)))
+                                                    )
+                                                    {
+                                                        Func_keyPress('', 'a', 0, 65);
+                                                        Func_keyPress('', 'e', 0, 69);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if ((a120 == 'ö') || (a120 == 'Ö'))
+                                                    {
+                                                        if
+                                                        (
+                                                            (a37 && (a83.x < (a130 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x + 1][a83.y].cellType == a150)))
+                                                            || (!a37 && (a83.y < (a131 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x][a83.y + 1].cellType == a150)))
+                                                        )
+                                                        {
+                                                            Func_keyPress('', 'o', 0, 79);
+                                                            Func_keyPress('', 'e', 0, 69);
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if ((a120 == 'ü') || (a120 == 'Ü'))
+                                                        {
+                                                            if
+                                                            (
+                                                                (a37 && (a83.x < (a130 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x + 1][a83.y].cellType == a150)))
+                                                                || (!a37 && (a83.y < (a131 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x][a83.y + 1].cellType == a150)))
+                                                            )
+                                                            {
+                                                                Func_keyPress('', 'u', 0, 85);
+                                                                Func_keyPress('', 'e', 0, 69);
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (a120 == 'ß')
+                                                            {
+                                                                if
+                                                                (
+                                                                    (a37 && (a83.x < (a130 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x + 1][a83.y].cellType == a150)))
+                                                                    || (!a37 && (a83.y < (a131 - 1) && (a116[a83.x][a83.y].cellType == a150) && (a116[a83.x][a83.y + 1].cellType == a150)))
+                                                                )
+                                                                {
+                                                                    Func_keyPress('', 's', 0, 83);
+                                                                    Func_keyPress('', 's', 0, 83);
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                return false;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    function Func_getFirstCellInfo(a141, a142, a40)
+    {
+        switch (a40)
+        {
+            case a156:
+                return {x: a141 + 1, y: a142, modeIsHorizontal: true};
+            case a155:
+                return {x: a141 + 1, y: a142, modeIsHorizontal: false};
+            case a149:
+                return {x: a141, y: a142 + 1, modeIsHorizontal: true};
+            case a148:
+                return {x: a141, y: a142 + 1, modeIsHorizontal: false};
+            case a152:
+                return {x: a141 - 1, y: a142, modeIsHorizontal: false};
+            case a158:
+                return {x: a141, y: a142 - 1, modeIsHorizontal: true};
+            default:
+                alert('Error');
+        }
+    }
+
+    function Func_clickXY(a141, a142, a63)
+    {
+        if ((a141 < 0) || (a142 < 0) || (a141 >= a130) || (a142 >= a131)) return;
+
+        if (a116[a141][a142].cellType == a151)
+        {
+            Func_selectWord(a83.x, a83.y, a37, false);
+
+            var a42;
+            if (a116[a141][a142].questions.length > 1)
+            {
+                var a52 = a116[a141][a142].questions[0].lineCount / (a116[a141][a142].questions[0].lineCount + a116[a141][a142].questions[1].lineCount);
+                if (a103 * a52 > a63)
+                {
+                    a42 = Func_getFirstCellInfo(a141, a142, a116[a141][a142].questions[0].startOffest);
+                }
+                else
+                {
+                    a42 = Func_getFirstCellInfo(a141, a142, a116[a141][a142].questions[1].startOffest);
+                }
+            }
+            else
+            {
+                a42 = Func_getFirstCellInfo(a141, a142, a116[a141][a142].questions[0].startOffest);
+            }
+            a83.x = a42.x;
+            a83.y = a42.y;
+            a37 = a42.modeIsHorizontal;
+            Func_selectWord(a83.x, a83.y, a37, true);
+        }
+        else
+        {
+            if (a116[a141][a142].cellType == a150)
+            {
+                Func_selectWord(a83.x, a83.y, a37, false);
+                if ((a141 == a83.x) && (a142 == a83.y))
+                {
+                    if
+                    (
+                        (a37
+                            && ((a116[a141][a142].connectionInfo == a31 || a116[a141][a142].connectionInfo == a66))
+                        )
+                        ||
+                        (!a37
+                            && ((a116[a141][a142].connectionInfo == a31 || a116[a141][a142].connectionInfo == a64))
+                        )
+                    )
+                    {
+                        a37 = !a37;
+                    }
+                }
+                else
+                {
+                    a83.x = a141;
+                    a83.y = a142;
+                    if (
+                        (a37 && ((a116[a141][a142].connectionInfo != a64) && (a116[a141][a142].connectionInfo != a31)))
+                        ||
+                        (!a37 && ((a116[a141][a142].connectionInfo != a66) && (a116[a141][a142].connectionInfo != a31)))
+                    )
+                    {
+                        a37 = !a37;
+                    }
+                }
+                Func_selectWord(a83.x, a83.y, a37, true);
+            }
+        }
+        var a106 = a28(a83.x, a83.y);
+        a153.style.left = Var_Zoom * a106.x + "px";
+        a153.style.top = Var_Zoom * a106.y + "px";
+        a153.focus();
+    }
+
+    function Func_staticMouseDownHandler(a93)
+    {
+        var a162 = a93;
+
+        var a135 = a162.layerX / Var_Zoom;
+        var a136 = a162.layerY / Var_Zoom;
+
+        var a165 = Math.floor((a135 - a111.widthOuter) / (a103 + a111.widthInner));
+        var a166 = Math.floor((a136 - a111.widthOuter) / (a103 + a111.widthInner));
+        var a99 = (a136 - a111.widthOuter) % (a103 + a111.widthInner);
+        var Var_handled = false;
+        if ((a165 >= 0) && (a166 >= 0) && (a165 < a130) && (a166 < a131))
+        {
+            if ((a116[a165][a166].cellType != a147)) {
+                Func_clickXY(a165, a166, a99);
+                Var_handled = true;
+            }
+        }
+        if (!Var_handled)
+        {
+            for (var i = 0; i < a85.length; i++)
+            {
+                if (
+                    (a135 >= a85[i].cell.aCoords.tl.x)
+                    && (a135 <= a85[i].cell.aCoords.tr.x)
+                    && (a136 >= a85[i].cell.aCoords.tl.y)
+                    && (a136 <= a85[i].cell.aCoords.bl.y)
+                )
+                {
+                    Func_clickXY(a4[i].x, a4[i].y);
+                    Var_handled = true;
+                }
+            }
+        }
+
+        if (!Var_handled) {
+            for (i = 0; i < cfg.customImages.length; i++) {
+                var item = cfg.customImages[i];
+                if (
+                    (a135 >= item.left)
+                    && a135 <= (item.left+item.width)
+                    && (a136 >= item.top)
+                    && a136 <= (item.top+item.height)
+                ){
+                    if (item.hasOwnProperty('linkTarget'))
+                    {
+                            window.open(
+                                item.linkTarget,
+                                '_blank'
+                            );
+                    }
+                    else if (item.hasOwnProperty('callFunction'))
+                    {
+                        eval('ratefux.'+item.callFunction+'()');
+                    }
+                    Var_handled = true;
+                }
+            }
+        }
+
+        if (!Var_handled) {
+            if (
+                (a135 <= a171.left)
+                && a135 >= (a171.left-a171.width)
+                && (a136 >= a171.top)
+                && a136 <= (a171.top+a171.height)
+            ){
+                window.open("https://www.ratefux.de",'_blank');
+            }
+        }
+
+        a112.renderAll();
+        a93.stopPropagation();
+        a93.preventDefault();
+
+    }
+
+    function Func_mouseDownHandler(a93)
+    {
+        var a162 = a93.e;
+
+        var a107 = a112.getPointer(a162);
+        var a135 = a107.x;
+        var a136 = a107.y;
+
+        var a165 = Math.floor((a135 - a111.widthOuter) / (a103 + a111.widthInner));
+        var a166 = Math.floor((a136 - a111.widthOuter) / (a103 + a111.widthInner));
+        var a99 = (a136 - a111.widthOuter) % (a103 + a111.widthInner);
+        if ((a165 >= 0) && (a166 >= 0) && (a165 < a130) && (a166 < a131))
+        {
+            Func_clickXY(a165, a166, a99);
+        }
+        else
+        {
+            for (var i = 0; i < a85.length; i++)
+            {
+                if (
+                    (a135 >= a85[i].cell.aCoords.tl.x)
+                    && (a135 <= a85[i].cell.aCoords.tr.x)
+                    && (a136 >= a85[i].cell.aCoords.tl.y)
+                    && (a136 <= a85[i].cell.aCoords.bl.y)
+                )
+                {
+                    Func_clickXY(a4[i].x, a4[i].y);
+                }
+            }
+        }
+        a112.renderAll();
+    }
+
+    function Func_inputHandler(a146)
+    {
+        var a139 = a153.value.trim();
+        a153.value = "";
+        for (var i = 0; i < a139.length; i++)
+        {
+            a146.key = a139.charAt(i).toUpperCase();
+            a146.keyCode = a146.key.charCodeAt(0);
+            a146.charCode = 0;
+
+            Func_keyPress(a146.target, a146.key, a146.charCode, a146.keyCode);
+        }
+        a146.stopPropagation();
+        a146.preventDefault();
+        a112.renderAll();
+    }
+
+    function Func_keydownHandler(a146)
+    {
+        var a70 = [8, 13, 35, 36, 37, 38, 39, 40, 46];
+
+        a146.keyCode = a146.keyCode || a146.charCode;
+
+        if (a70.indexOf(a146.keyCode) == -1) return;
+
+        a146.target = a153;
+        a146.charCode = 0;
+
+        if (Func_keyPress(a146.target, a146.key, a146.charCode, a146.keyCode))
+        {
+            a146.stopPropagation();
+            a146.preventDefault();
+            a112.renderAll();
+        }
+    }
+
+    function log(msg, append)
+    {
+        if (append)
+        {
+            document.getElementById("msg").innerHTML += msg;
+        }
+        else
+        {
+            document.getElementById("msg").innerHTML = msg;
+        }
+    }
+
+    function Func_drawButtons()
+    {
+        cfg.customImages.forEach(
+            function(item)
+            {
+                fabric.Image.fromURL(item.url, function(oImg) {
+                    oImg.set('left', item.left);
+                    oImg.set('top', item.top);
+                    oImg.set('scaleX', item.width / oImg.width);
+                    oImg.set('scaleY', item.height / oImg.height);
+                    oImg.selectable = false;
+                    if (item.hasOwnProperty('linkTarget'))
+                    {
+                        oImg.on('mousedown', function(){
+                            window.open(
+                                item.linkTarget,
+                                '_blank'
+                            );
+                        });
+                    }
+                    else if (item.hasOwnProperty('callFunction'))
+                    {
+                        oImg.on('mousedown', eval('ratefux.'+item.callFunction));
+                    }
+
+                    if (item.hasOwnProperty('urlHover'))
+                    {
+                        oImg.on('mouseover', function(e) {
+                            this.setSrc(item.urlHover, function(){a112.renderAll(true)});
+                        });
+                        oImg.on('mouseout', function(e) {
+                            this.setSrc(item.url, function(){a112.renderAll(true)});
+                        });
+                    }
+
+                    a112.add(oImg);
+                    a112.renderAll();
+                });
+            }
+        );
+    }
+
+    function Func_showMessage(a121)
+    {
+        alert(a121);
+    }
+
+    function a168(a120, a110)
+    {
+        var a138 = 256;
+        var a159 = a120.length;
+        var a164 = [];
+        for (var i = 0; i < a138; i++)
+        {
+            a164[i] = i;
+        }
+        var a163 = 0;
+        var a144 = '';
+        for (i = 0; i < a138; i++)
+        {
+            a163 = (a163 + a164[i] + a120.charCodeAt(i % a159)) % a138;
+            a144 = a164[a163];
+            a164[a163] = a164[i];
+            a164[i] = a144;
+        }
+
+        var a160 = a110.length;
+        var a137 = '';
+        i = 0;
+        a163 = 0;
+
+        for (var n = 0; n <= a160 - 1; n++)
+        {
+            i = (i + 1) % a138;
+            a163 = (a163 + a164[i]) % a138;
+            a144 = a164[a163];
+            a164[a163] = a164[i];
+            a164[i] = a144;
+            var a76 = a164[(a164[i] + a164[a163]) % a138];
+    		a137 += String.fromCharCode(((a110.charCodeAt(n)-65)^a76));
+        }
+        return a137;
+    }
+
+    ratefux.initMixedCell = function(a79)
+    {
+        var input = document.createElement("form");
+        var MCinnerHtml =
+            '<input type="text" id="mc"' +
+            'style="' +
+            'outline: none;' +
+            'font-size: ' + a113.fontSize + 'px;' +
+            'text-align: center;' +
+            'cursor: text;' +
+            'padding: 0;' +
+            'position: absolute; ' +
+            'left: 0; ' +
+            'top: 0; ' +
+            'Width: '+cfg.cellSize+'px; ' +
+            'Height: '+cfg.cellSize+'px; ' +
+            'border: none; ' +
+            'background-color: rgba(255,255,255,0);"' +
+            '/>';
+        input.innerHTML = MCinnerHtml;
+        document.getElementById(a79).parentNode.appendChild(input);
+        a153 = document.getElementById("mc");
+
+        a153.addEventListener('keydown', Func_keydownHandler, false);
+        a153.addEventListener('input', Func_inputHandler, false);
+
+
+        Var_myClickEvent = function(a146)
+        {
+            Func_clickXY(a83.x, a83.y, null);
+            a112.renderAll();
+            a146.stopPropagation();
+            a146.preventDefault();
+
+        };
+
+        a153.addEventListener('click', Var_myClickEvent);
+
+        a153.addEventListener('touchstart', Var_myClickEvent);
+    };
+
+    ratefux.Func_SaveToLocalstorage = function(){
+        var Var_userInput = new Array(a130);
+        for(var i=0; i<a130; i++) Var_userInput[i] = new Array(a131);
+
+        var Var_backup = new Array(a130);
+        for(i=0; i<a130; i++) Var_backup[i] = new Array(a131);
+
+        for(var k=0; k < a131; k++)
+        {
+            for(i=0; i < a130; i++)
+            {
+                if (a116[i][k].cellType == a150)
+                {
+                    Var_userInput[i][k] = a116[i][k].fabricText.get('text');
+                    Var_backup[i][k] = a116[i][k].backup;
+                } else {
+                    Var_userInput[i][k] = null;
+                    Var_backup[i][k] = null;
+                }
+            }
+        }
+        localStorage[a116ID+"U"] =JSON.stringify(Var_userInput);
+        localStorage[a116ID+"X"] =JSON.stringify(a83.x);
+        localStorage[a116ID+"Y"] =JSON.stringify(a83.y);
+        localStorage[a116ID+"M"] =JSON.stringify(a37);
+        localStorage[a116ID+"S"] =JSON.stringify(a82);
+        localStorage[a116ID+"B"] =JSON.stringify(Var_backup);
+        localStorage[a116ID+"F"] =JSON.stringify(a67);
+        localStorage[a116ID+"E"] =JSON.stringify(a59);
+
+    };
+
+    ratefux.Func_LoadFromLocalstorage = function(){
+        if (
+            (localStorage[a116ID+"U"] == undefined) ||
+            (localStorage[a116ID+"X"] == undefined) ||
+            (localStorage[a116ID+"Y"] == undefined) ||
+            (localStorage[a116ID+"M"] == undefined) ||
+            (localStorage[a116ID+"S"] == undefined) ||
+            (localStorage[a116ID+"B"] == undefined) ||
+            (localStorage[a116ID+"F"] == undefined) ||
+            (localStorage[a116ID+"E"] == undefined)
+        )
+        {
+            return false;
+        }
+
+        var Var_userInput = JSON.parse(localStorage[a116ID+"U"]);
+        var Var_backup = JSON.parse(localStorage[a116ID+"B"]);
+        if (Var_userInput.length != a130)
+        {
+            return false;
+        } else {
+            for(var i=0; i<a130; i++)
+            {
+                if (Var_userInput[i].length != a131)
+                {
+                    return false;
+                }
+            }
+        }
+        for(var k=0; k < a131; k++)
+        {
+            for(var i=0; i < a130; i++)
+            {
+                if (a116[i][k].cellType == a150)
+                {
+                    a116[i][k].fabricText.set('text', Var_userInput[i][k]);
+                    if (a116[i][k].solutionIndex > 0)
+                    {
+                        a85[a116[i][k].solutionIndex-1].solutionChar.set('text', Var_userInput[i][k]);
+                    }
+                    a116[i][k].backup = Var_backup[i][k];
+                }
+            }
+        }
+
+        a83.x = JSON.parse(localStorage[a116ID+"X"]);
+        a83.y = JSON.parse(localStorage[a116ID+"Y"]);
+        a37 = JSON.parse(localStorage[a116ID+"M"]);
+        a82 = JSON.parse(localStorage[a116ID+"S"]);
+        a67 = JSON.parse(localStorage[a116ID+"F"]);
+        a59 = JSON.parse(localStorage[a116ID+"E"]);
+
+        localStorage.removeItem(a116ID+"U");
+        localStorage.removeItem(a116ID+"X");
+        localStorage.removeItem(a116ID+"Y");
+        localStorage.removeItem(a116ID+"M");
+        localStorage.removeItem(a116ID+"S");
+        localStorage.removeItem(a116ID+"B");
+        localStorage.removeItem(a116ID+"F");
+        localStorage.removeItem(a116ID+"E");
+
+        return true;
+    };
+
+    ratefux.init = function(a79, Param_Fontname)
+    {
+        a113.fontFamily = Param_Fontname;
+        a114.fontFamily = Param_Fontname;
+        a32.fontFamily = Param_Fontname;
+        a65.solutionCharFontFamily = Param_Fontname;
+        a65.numberFontFontFamily = Param_Fontname;
+        a170.fontFamily = Param_Fontname;
+
+        ratefux.initMixedCell(a79);
+        a112 = new fabric.StaticCanvas(a79, {imageSmoothingEnabled: false});
+        a112.selection = false;
+        ratefux.zoomToFit(window.innerWidth, window.innerHeight);
+
+        a112.allowTouchScrolling = true;
+        a112.hoverCursor = 'pointer';
+
+        document.getElementById(a79).addEventListener("mousedown", Func_staticMouseDownHandler);
+        window.addEventListener("beforeunload", function(){ratefux.Func_SaveToLocalstorage()});
+
+        a43 = {fontLeadingTop: cfg.FontLeadingTopDC, fontHeight: cfg.FontHeightDC, fontLeadingBottom: cfg.FontLeadingBottomDC};
+
+        var a127 = new fabric.Text("M", {left: 0, top: 0});
+        a127.fontSize = a113.fontSize;
+        a127.fontFamily = a113.fontFamily;
+        a127.fontWeight = a113.fontWeight;
+        a127.fill = a113.color;
+        a44 = {fontLeadingTop: cfg.FontLeadingTopCC, fontHeight: cfg.FontHeightCC, fontLeadingBottom: cfg.FontLeadingBottomCC};
+
+        a112.renderOnAddRemove = false;
+
+        a112.backgroundColor = cfg.canvasBackgroundColor;
+
+        a96.fabricRect = new fabric.Rect({
+            left: 0,
+            top: (a103 * a131) + (2 * a111.widthOuter) + ((a131 - 1) * a111.widthInner),
+            fill: a96.color,
+            stroke: a96.stroke,
+            strokeWidth: a96.strokeWidth,
+            width: (a103 * a130) + (2 * a111.widthOuter) + ((a130 - 1) * a111.widthInner)-a96.strokeWidth,
+            height: a96.height - a96.strokeWidth,
+            selectable: false
+        });
+        a112.add(a96.fabricRect);
+
+        for (var y = 0; y < a131; y++)
+        {
+            for (var x = 0; x < a130; x++)
+            {
+                if (a116[x][y].solutionIndex > 0)
+                {
+                    a4[a116[x][y].solutionIndex-1] = {x:x, y:y};
+                }
+
+                if (a116[x][y].cellType == a147) continue;
+
+                var a106 = a28(x, y);
+                a116[x][y].fabricRect = new fabric.Rect({
+                    left: a106.x,
+                    top: a106.y,
+                    fill: a116[x][y].fillColor,
+                    width: a103,
+                    height: a103,
+                    strokeWidth: 0,
+                    selectable: false
+                });
+                a112.add(a116[x][y].fabricRect);
+                a112.add(a116[x][y].fabricRect);
+
+                if (a116[x][y].cellType == a151)
+                {
+                    var a102 = [];
+                    var a33;
+                    var a91;
+                    if (a116[x][y].questions.length == 2)
+                    {
+                        var a119 = a116[x][y].questions[0].lineCount / (a116[x][y].questions[0].lineCount + a116[x][y].questions[1].lineCount);
+                        a33 = a103 - a68.top - a68.splitTop - a111.widthSparator - a68.splitBottom - a68.bottom;
+                        var a891 = a116[x][y].questions[0].lineCount * a43.fontHeight
+                            + (a116[x][y].questions[0].lineCount - 1) * a68.lineDistance;
+                        a91 = a106.y + a68.top + (((a119 * a33) - a891) / 2);
+                        a102.push(a91);
+
+                        var a892 = a116[x][y].questions[1].lineCount * a43.fontHeight
+                            + (a116[x][y].questions[1].lineCount - 1) * a68.lineDistance;
+                        var a90 = a106.y + a68.top + (a119 * a33) + a68.splitTop + a111.widthSparator + a68.splitBottom + ((((1 - a119) * a33) - a892) / 2);
+                        a102.push(a90);
+
+                        var a108 = a106.y + a68.top + a68.splitTop + a103 * a119 - (a111.widthSparator / 2);
+                        var a144Line = new fabric.Line(
+                            [a106.x, a108, a106.x + a103, a108],
+                            {
+                                originX: 'center',
+                                originY: 'center',
+                                stroke: a111.colorSeparator,
+                                strokeWidth: a111.widthSparator,
+                                selectable: false
+                            }
+                        );
+
+                        a112.add(a144Line);
+                        Var_AllSplitters.push(a144Line);
+                    }
+                    else
+                    {
+                        a33 = a103 - a68.top - a68.bottom;
+                        var a89 = a116[x][y].questions[0].lineCount * a43.fontHeight
+                            + (a116[x][y].questions[0].lineCount - 1) * a68.lineDistance;
+                        a91 = a106.y + a68.top + ((a33 - a89) / 2);
+                        a102.push(a91);
+                    }
+
+                    for (var q = 0; q < a116[x][y].questions.length; q++)
+                    {
+                        var a126 = a168(a169, a116[x][y].questions[q].question).split("|");
+                        var a140 = a102[q];
+
+                        var a104 = 0;
+                        var a69 = [];
+                        for (var l = 0; l < a126.length; l++)
+                        {
+                            var a139 = new fabric.Text(
+                                a126[l],
+                                {
+                                    originX: 'left',
+                                    originY: 'top',
+                                    top: a140 - a43.fontLeadingTop,
+                                    fontSize: a114.fontSize,
+                                    fontFamily: a114.fontFamily,
+                                    fontWeight: a114.fontWeight,
+                                    fill: a114.color,
+                                    selectable: true
+                                }
+                            );
+                            a112.add(a139);
+                            Var_AllTextDC.push(a139);
+                            a69.push(a139);
+                            if (a139.getScaledWidth() > a104) a104 = a139.getScaledWidth();
+                            a140 = a140 + a43.fontHeight + a68.lineDistance;
+                        }
+                        for (var i = 0; i < a69.length; i++)
+                        {
+                            a69[i].left = Math.round(a106.x + (((a103 - a68.left - a68.right) - a104) / 2) + a68.left);
+                        }
+                    }
+                }
+                else
+                {
+                    if (a116[x][y].cellType == a150)
+                    {
+                        a116[x][y].solution = a168(a169, a116[x][y].solution);
+                        a123++;
+                        if (a83.x == -1)
+                        {
+                            a83.x = x;
+                            a83.y = y;
+                        }
+
+                        var a144Text = new fabric.Text(
+                            "",
+                            {
+                                fontSize: a113.fontSize,
+                                fontFamily: a113.fontFamily,
+                                fontWeight: a113.fontWeight,
+                                fill: a113.color,
+                                originX: "center",
+                                selectable: false
+                            }
+                        );
+                        a116[x][y].fabricText = a144Text;
+                        Var_AllTextCC.push(a144Text);
+                        a116[x][y].fabricText.left = a106.x + ((a103 - a116[x][y].fabricText.width) / 2);
+                        a116[x][y].fabricText.top = a106.y + ((a103 - a44.fontHeight) / 2) - a44.fontLeadingTop;
+                        a112.add(a116[x][y].fabricText);
+                        if (a116[x][y].solutionIndex > 0)
+                        {
+                            var a144Circle = new fabric.Circle({
+                                left: a106.x + a103 / 2,
+                                top: a106.y + a103 / 2,
+                                scaleX: 0.9,
+                                scaleY: 0.9,
+                                angle: 90,
+                                startAngle: 0,
+                                endAngle: 2 * Math.PI * 3 / 4,
+                                radius: a103 / 2,
+                                originX: 'center',
+                                originY: 'center',
+                                fill: 'transparent',
+                                stroke: a39.stroke,
+                                strokeWidth: a39.strokeWidth,
+                                selectable: false
+                            });
+
+                            Var_AllCircles.push(a144Circle);
+                            a112.add(a144Circle);
+
+                            var a144CircleText = new fabric.Text(
+                                a116[x][y].solutionIndex.toString(),
+                                {
+                                    left: Math.round(a106.x + a103*0.9),
+                                    top: a106.y + a103,
+                                    originX: 'right',
+                                    originY: 'bottom',
+                                    fontSize: a32.fontSize,
+                                    fontFamily: a32.fontFamily,
+                                    fontWeight: a32.fontWeight,
+                                    fill: a32.color,
+                                    selectable: false
+                                }
+                            );
+                            Var_AllCirclesText.push(a144CircleText);
+                            a112.add(a144CircleText);
+                        }
+                    }
+                }
+            }
+        }
+
+        var a118 = 0;
+        for (i = 0; i < a125.length; i++)
+        {
+            var a25 = i - a118;
+            if (a125.charAt(i) != ' ')
+            {
+                a85.push(
+                    {
+                        'cell': null,
+                        'solutionCharIndex': a25 + 1,
+                        'solutionCharNumber': null,
+                        'solutionChar': null
+                    }
+                );
+
+                a85[a25].cell = new fabric.Rect({
+                    originX: "center",
+                    originY: "center",
+                    left: a65.left + (a65.cellSize+1) * a25 + a65.spaceMargin * a118 + a65.cellSize/2,
+                    top: a96.fabricRect.top + a65.top + a65.cellSize/2,
+                    fill: a65.cellColor,
+                    stroke: a65.cellStrokeColor,
+                    strokeWidth: a65.cellStrokeWidth,
+                    width: a65.cellSize,
+                    height: a65.cellSize,
+                    selectable: false
+                });
+                a112.add(a85[a25].cell);
+
+                a85[a25].solutionChar = new fabric.Text(
+                    "",
+                    {
+                        fontSize: a65.solutionCharFontSize,
+                        fontFamily: a65.numberFontFontFamily,
+                        fontWeight: a65.fontWeight,
+                        fill: a65.solutionCharFontColor,
+                        originX: "center",
+                        originY: "center",
+                        left: a85[a25].cell.left,
+                        top: a85[a25].cell.top,
+                        selectable: false
+                    }
+                );
+                a112.add(a85[a25].solutionChar);
+
+                a85[a25].solutionCharNumber = new fabric.Text(
+                    (a25+1).toString(),
+                    {
+                        fontSize: a65.numberFontSize,
+                        fontFamily: a65.numberFontFontFamily,
+                        fontWeight: a65.numberFontFontWeight,
+                        fill: a65.numberFontColor,
+                        originX: "right",
+                        originY: "bottom",
+                        left: a85[a25].cell.left - (a65.cellSize/2) + 0.9*a65.cellSize,
+                        top: a85[a25].cell.top - (a65.cellSize/2) + a65.cellSize,
+                        selectable: false
+                    }
+                );
+                a112.add(a85[a25].solutionCharNumber);
+
+
+            }
+            else
+            {
+                a118++;
+            }
+
+        }
+
+        a171 = new fabric.Text(
+            Var_Serialnumber,
+            {
+                top: a96.fabricRect.top+3,
+                left: a96.fabricRect.width-3,
+                originX : 'right',
+                originY : 'top',
+                fontSize: a170.fontSize,
+                fontFamily: a170.fontFamily,
+                fontWeight: a170.fontWeight,
+                fill: a170.color,
+                selectable: false
+            });
+        a112.add(a171);
+
+        a53();
+        a60();
+        Func_drawButtons();
+
+        if (ratefux.Func_LoadFromLocalstorage()) {
+            a37 = !a37;
+        }
+        Func_clickXY(a83.x, a83.y);
+        a153.focus();
+    };
+
+    ratefux.zoomToFit = function(canvasWidth, canvasHeight)
+    {
+        a112.setWidth(canvasWidth);
+        a112.setHeight(canvasHeight);
+
+        var originalWidth = a103 * a130 + 2 * a111.widthOuter + (a130 - 1) * a111.widthInner;
+        var zoomW = canvasWidth / originalWidth;
+        var originalHeight = (a103 * a131) + (2 * a111.widthOuter) + ((a131 - 1) * a111.widthInner) + a96.height;
+        var zoomH = canvasHeight / originalHeight;
+        Var_Zoom = Math.min(zoomW, zoomH);
+        a112.setZoom(Var_Zoom);
+
+        a153.style.width = a153.style.height = a103 * Var_Zoom + "px";
+        var a106 = a28(a83.x, a83.y);
+        a153.style.left = (a106.x * Var_Zoom) + "px";
+        a153.style.top = (a106.y * Var_Zoom) + "px";
+        a153.focus();
+    };
+
+    ratefux.clickBtnHilfe = function()
+    {
+    };
+
+    ratefux.clickBtnFehler = function()
+    {
+        a82 = !a82;
+
+        for (var y = 0; y < a131; y++)
+        {
+            for (var x = 0; x < a130; x++)
+            {
+                if (a116[x][y].cellType == a150)
+                {
+                    if (a116[x][y].fabricText.text != a116[x][y].solution)
+                    {
+                        if (a82)
+                        {
+                            a116[x][y].fabricText.set('fill', a113.errorColor);
+                        }
+                        else
+                        {
+                            a116[x][y].fabricText.set('fill', a113.color);
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    ratefux.clickBtnLeeren = function()
+    {
+        a67 = 0;
+        a59 = 0;
+
+        for (var y = 0; y < a131; y++)
+        {
+            for (var x = 0; x < a130; x++)
+            {
+                if (a116[x][y].cellType == a150)
+                {
+                    a116[x][y].fabricText.set('text', '');
+                    a116[x][y].backup = null;
+                    a116[x][y].fabricText.text = '';
+                    if (a116[x][y].solutionIndex > 0)
+                    {
+                        a85[a116[x][y].solutionIndex-1].solutionChar.set('text', '');
+                    }
+
+                }
+            }
+        }
+
+
+    };
+
+    function Func_isLWortSolved()
+    {
+        var a71 = '';
+        a85.forEach(function(a109){a71 += a109.solutionChar.text});
+        return (a125.replace(/ /g, '') == a71);
+    }
+
+
+    ratefux.clickBtnLoesen = function()
+    {
+        var a105 = Func_isLWortSolved();
+        if (a105)
+        {
+            Var_msgSolvedEnabled = false;
+            Var_msgSolvedWithErrorsEnabled = false;
+            for (var y = 0; y < a131; y++)
+            {
+                for (var x = 0; x < a130; x++)
+                {
+                    if (a116[x][y].cellType == a150)
+                    {
+                        Func_setLetter(x, y, a116[x][y].solution);
+                    }
+                }
+            }
+            a112.renderAll();
+            Var_msgSolvedEnabled = true;
+            Var_msgSolvedWithErrorsEnabled = true;
+        }
+        else
+        {
+            Func_showMessage('Die Auflösung des Rätsels\nkann erst angesehen werden,\nwenn wenigstens das Lösungswort\nkorrekt gelöst wurde');
+        }
+    };
+
+}(window.ratefux = window.ratefux || {}));
+
+
+</script><style data-emotion="css-global ra83yt">:root{--sz-basic-text-color-primary:#29293a;--sz-basic-text-color-secondary:#71737f;--sz-basic-text-color-highlight:#009990;--sz-basic-background-color-primary:#fff;--sz-basic-background-color-secondary:#f2f2f3;--sz-basic-background-color-highlight:#f2f2f3;--sz-basic-border-color-primary:#e0e0e3;--sz-basic-border-color-secondary:#c0c1c6;--sz-basic-border-color-highlight-primary:#009990;--sz-basic-border-color-highlight-secondary:#81d1c6;--sz-basic-border-color-focus:#00857F;--sz-header-background-color:#fff;--sz-header-border-color:#e0e0e3;--sz-header-logo-background-color:#29293a;--sz-header-magazin-text-color-hover:#000;--sz-footer-background-color:#f2f2f3;--sz-produktswitch-border-color:#29293a;--sz-main-menu-background-color-munich:#dae4ee;--sz-main-menu-background-color-munich-hover:#c3d8ea;--sz-breadcrumbs-text-color:#71737f;--sz-label-background-color-primary:#f2f2f3;--sz-label-background-color-secondary:#fff;--sz-label-background-color-highlight:#b2dfd9;--sz-breaking-news-background-color:#fffe89;--sz-modal-background-color:#fff;--sz-button-text-color-primary-default:#fff;--sz-button-text-color-primary-disabled:#e0e0e3;--sz-button-background-color-primary-default:#29293a;--sz-button-background-color-primary-hover:#565765;--sz-button-background-color-primary-disabled:#71737f;--sz-button-text-color-secondary-default:#29293a;--sz-button-text-color-secondary-disabled:#93959c;--sz-button-border-color-secondary-default:#29293a;--sz-button-border-color-secondary-disabled:#c0c1c6;--sz-button-background-color-secondary-default:#fff;--sz-button-background-color-secondary-hover:#f2f2f3;--sz-button-text-color-highlight-default:#29293a;--sz-button-text-color-highlight-disabled:#71737f;--sz-button-background-color-highlight-default:#b2dfd9;--sz-button-background-color-highlight-hover:#d8efec;--sz-button-background-color-highlight-disabled:#e0e0e3;--sz-button-text-color-tertiary-default:#29293a;--sz-button-text-color-tertiary-disabled:#c0c1c6;--sz-button-background-color-tertiary-default:#fff;--sz-button-border-color-tertiary-default:#e0e0e3;--sz-button-background-color-tertiary-hover:#f2f2f3;--sz-button-background-color-tertiary-active:#f2f2f3;--sz-input-field-border-color-default:#71737f;--sz-input-field-border-color-hover:#29293a;}@media screen and (prefers-color-scheme: dark){[data-color-scheme=enable-dark-mode]{--sz-basic-text-color-primary:#c0c1c6;--sz-basic-text-color-secondary:#71737f;--sz-basic-text-color-highlight:#69c1b8;--sz-basic-background-color-primary:#000;--sz-basic-background-color-secondary:#29293a;--sz-basic-background-color-highlight:#29293a;--sz-basic-border-color-primary:#71737f;--sz-basic-border-color-secondary:#71737f;--sz-basic-border-color-highlight-primary:#69c1b8;--sz-basic-border-color-highlight-secondary:#69c1b8;--sz-basic-border-color-focus:#009990;--sz-header-background-color:#29293a;--sz-header-border-color:#29293a;--sz-header-logo-background-color:#f2f2f3;--sz-header-magazin-text-color-hover:#fff;--sz-footer-background-color:#29293a;--sz-produktswitch-border-color:#34344d;--sz-main-menu-background-color-munich:#29293a;--sz-main-menu-background-color-munich-hover:#34344d;--sz-breadcrumbs-text-color:#c0c1c6;--sz-label-background-color-primary:#34344d;--sz-label-background-color-secondary:#fff;--sz-label-background-color-highlight:#69c1b8;--sz-breaking-news-background-color:#2b3671;--sz-modal-background-color:#29293a;--sz-button-text-color-primary-default:#29293a;--sz-button-text-color-primary-disabled:#29293a;--sz-button-background-color-primary-default:#c0c1c6;--sz-button-background-color-primary-hover:#e0e0e3;--sz-button-background-color-primary-disabled:#71737f;--sz-button-text-color-secondary-default:#c0c1c6;--sz-button-text-color-secondary-disabled:#71737f;--sz-button-border-color-secondary-default:#c0c1c6;--sz-button-border-color-secondary-disabled:#71737f;--sz-button-background-color-secondary-default:#000;--sz-button-background-color-secondary-hover:#29293a;--sz-button-text-color-highlight-default:#29293a;--sz-button-text-color-highlight-disabled:#29293a;--sz-button-background-color-highlight-default:#69c1b8;--sz-button-background-color-highlight-hover:#81d1c6;--sz-button-background-color-highlight-disabled:#71737f;--sz-button-text-color-tertiary-default:#c0c1c6;--sz-button-text-color-tertiary-disabled:#71737f;--sz-button-background-color-tertiary-default:transparent;--sz-button-border-color-tertiary-default:#71737f;--sz-button-background-color-tertiary-hover:#29293a;--sz-button-background-color-tertiary-active:#34344d;--sz-input-field-border-color-default:#c0c1c6;--sz-input-field-border-color-hover:#fff;}}.sz-disable-dark-mode{--sz-basic-text-color-primary:#29293a;--sz-basic-text-color-secondary:#71737f;--sz-basic-text-color-highlight:#009990;--sz-basic-background-color-primary:#fff;--sz-basic-background-color-secondary:#f2f2f3;--sz-basic-background-color-highlight:#f2f2f3;--sz-basic-border-color-primary:#e0e0e3;--sz-basic-border-color-secondary:#c0c1c6;--sz-basic-border-color-highlight-primary:#009990;--sz-basic-border-color-highlight-secondary:#81d1c6;--sz-basic-border-color-focus:#00857F;--sz-header-background-color:#fff;--sz-header-border-color:#e0e0e3;--sz-header-logo-background-color:#29293a;--sz-header-magazin-text-color-hover:#000;--sz-footer-background-color:#f2f2f3;--sz-produktswitch-border-color:#29293a;--sz-main-menu-background-color-munich:#dae4ee;--sz-main-menu-background-color-munich-hover:#c3d8ea;--sz-breadcrumbs-text-color:#71737f;--sz-label-background-color-primary:#f2f2f3;--sz-label-background-color-secondary:#fff;--sz-label-background-color-highlight:#b2dfd9;--sz-breaking-news-background-color:#fffe89;--sz-modal-background-color:#fff;--sz-button-text-color-primary-default:#fff;--sz-button-text-color-primary-disabled:#e0e0e3;--sz-button-background-color-primary-default:#29293a;--sz-button-background-color-primary-hover:#565765;--sz-button-background-color-primary-disabled:#71737f;--sz-button-text-color-secondary-default:#29293a;--sz-button-text-color-secondary-disabled:#93959c;--sz-button-border-color-secondary-default:#29293a;--sz-button-border-color-secondary-disabled:#c0c1c6;--sz-button-background-color-secondary-default:#fff;--sz-button-background-color-secondary-hover:#f2f2f3;--sz-button-text-color-highlight-default:#29293a;--sz-button-text-color-highlight-disabled:#71737f;--sz-button-background-color-highlight-default:#b2dfd9;--sz-button-background-color-highlight-hover:#d8efec;--sz-button-background-color-highlight-disabled:#e0e0e3;--sz-button-text-color-tertiary-default:#29293a;--sz-button-text-color-tertiary-disabled:#c0c1c6;--sz-button-background-color-tertiary-default:#fff;--sz-button-border-color-tertiary-default:#e0e0e3;--sz-button-background-color-tertiary-hover:#f2f2f3;--sz-button-background-color-tertiary-active:#f2f2f3;--sz-input-field-border-color-default:#71737f;--sz-input-field-border-color-hover:#29293a;}.sz-force-dark-mode{--sz-basic-text-color-primary:#c0c1c6;--sz-basic-text-color-secondary:#71737f;--sz-basic-text-color-highlight:#69c1b8;--sz-basic-background-color-primary:#000;--sz-basic-background-color-secondary:#29293a;--sz-basic-background-color-highlight:#29293a;--sz-basic-border-color-primary:#71737f;--sz-basic-border-color-secondary:#71737f;--sz-basic-border-color-highlight-primary:#69c1b8;--sz-basic-border-color-highlight-secondary:#69c1b8;--sz-basic-border-color-focus:#009990;--sz-header-background-color:#29293a;--sz-header-border-color:#29293a;--sz-header-logo-background-color:#f2f2f3;--sz-header-magazin-text-color-hover:#fff;--sz-footer-background-color:#29293a;--sz-produktswitch-border-color:#34344d;--sz-main-menu-background-color-munich:#29293a;--sz-main-menu-background-color-munich-hover:#34344d;--sz-breadcrumbs-text-color:#c0c1c6;--sz-label-background-color-primary:#34344d;--sz-label-background-color-secondary:#fff;--sz-label-background-color-highlight:#69c1b8;--sz-breaking-news-background-color:#2b3671;--sz-modal-background-color:#29293a;--sz-button-text-color-primary-default:#29293a;--sz-button-text-color-primary-disabled:#29293a;--sz-button-background-color-primary-default:#c0c1c6;--sz-button-background-color-primary-hover:#e0e0e3;--sz-button-background-color-primary-disabled:#71737f;--sz-button-text-color-secondary-default:#c0c1c6;--sz-button-text-color-secondary-disabled:#71737f;--sz-button-border-color-secondary-default:#c0c1c6;--sz-button-border-color-secondary-disabled:#71737f;--sz-button-background-color-secondary-default:#000;--sz-button-background-color-secondary-hover:#29293a;--sz-button-text-color-highlight-default:#29293a;--sz-button-text-color-highlight-disabled:#29293a;--sz-button-background-color-highlight-default:#69c1b8;--sz-button-background-color-highlight-hover:#81d1c6;--sz-button-background-color-highlight-disabled:#71737f;--sz-button-text-color-tertiary-default:#c0c1c6;--sz-button-text-color-tertiary-disabled:#71737f;--sz-button-background-color-tertiary-default:transparent;--sz-button-border-color-tertiary-default:#71737f;--sz-button-background-color-tertiary-hover:#29293a;--sz-button-background-color-tertiary-active:#34344d;--sz-input-field-border-color-default:#c0c1c6;--sz-input-field-border-color-hover:#fff;}</style></head><body style="padding:0;margin:0"><div id="canvasSizer" data-hydration-root="true"><div class="innerCanvasContainer" id="innerCanvasContainer"><canvas id="c"></canvas></div><style data-emotion="css wbtjav">.css-wbtjav{font-family:'Archivo Narrow',sans-serif;-webkit-tap-highlight-color:'transparent';}@font-face{font-family:'Archivo Narrow';font-style:normal;font-weight:700;src:local('Archivo Narrow Bold'),local('ArchivoNarrow-Bold'),url('https://www.sueddeutsche.de/szde-assets/szde-mini-apps/font/ArchivoNarrow-Bold.ttf') format('truetype');}@font-face{font-family:Helvetica;font-weight:bold;src:local(HelveticaNeue-CondensedBold);}</style><div class="css-wbtjav"> </div></div><script type="module" src="https://www.sueddeutsche.de/szde-assets/js/szde-mini-apps-client-D1C0In-d.mjs" crossorigin="anonymous" integrity="sha384-CNKA5e9Hyhpu0NJyXEoQGp+u7xu2jjU11aQSd8pPd/7SgBV+8TT+UMJtUEMIn1JZ"></script></body></html>
