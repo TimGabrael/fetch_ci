@@ -1,0 +1,388 @@
+{
+  "id": 21860,
+  "crosswords": {
+    "no": "021860",
+    "difficulty": 3,
+    "created": "2025-10-22",
+    "start": "2025-12-11",
+    "partner": "spiegel.de",
+    "cols": 9,
+    "rows": 9,
+    "clues": [
+      {
+        "id": 1,
+        "col": 0,
+        "row": 0,
+        "s": [
+          1,
+          0
+        ],
+        "e": [
+          1,
+          6
+        ],
+        "t": "gütig,\nbarm-\nherzig"
+      },
+      {
+        "id": 2,
+        "col": 0,
+        "row": 1,
+        "s": [
+          1,
+          1
+        ],
+        "e": [
+          6,
+          1
+        ],
+        "t": "New\nYorker\nHightech-\nBörse"
+      },
+      {
+        "id": 3,
+        "col": 0,
+        "row": 2,
+        "s": [
+          0,
+          3
+        ],
+        "e": [
+          8,
+          3
+        ],
+        "t": "Sport-\nanlage\nin Gast-\nstätten"
+      },
+      {
+        "id": 4,
+        "col": 0,
+        "row": 4,
+        "s": [
+          1,
+          4
+        ],
+        "e": [
+          3,
+          4
+        ],
+        "t": "dieses,\njenes"
+      },
+      {
+        "id": 5,
+        "col": 0,
+        "row": 5,
+        "s": [
+          1,
+          5
+        ],
+        "e": [
+          5,
+          5
+        ],
+        "t": "Stink-\nmarder"
+      },
+      {
+        "id": 6,
+        "col": 0,
+        "row": 7,
+        "s": [
+          0,
+          6
+        ],
+        "e": [
+          2,
+          6
+        ],
+        "t": "latein.:\nich"
+      },
+      {
+        "id": 7,
+        "col": 0,
+        "row": 8,
+        "s": [
+          1,
+          8
+        ],
+        "e": [
+          4,
+          8
+        ],
+        "t": "Anflug,\nSchimmer"
+      },
+      {
+        "id": 8,
+        "col": 1,
+        "row": 7,
+        "s": [
+          2,
+          7
+        ],
+        "e": [
+          8,
+          7
+        ],
+        "t": "Zusatz-\nentgelt"
+      },
+      {
+        "id": 9,
+        "col": 2,
+        "row": 0,
+        "s": [
+          3,
+          0
+        ],
+        "e": [
+          3,
+          5
+        ],
+        "t": "gefähr-\nlicher\nIsolier-\nstoff"
+      },
+      {
+        "id": 10,
+        "col": 2,
+        "row": 2,
+        "s": [
+          2,
+          3
+        ],
+        "e": [
+          2,
+          8
+        ],
+        "t": "Pferde-\ngangart"
+      },
+      {
+        "id": 11,
+        "col": 3,
+        "row": 6,
+        "s": [
+          3,
+          7
+        ],
+        "e": [
+          3,
+          8
+        ],
+        "t": "Internet-\nadress-\nendung:\nRussland"
+      },
+      {
+        "id": 12,
+        "col": 4,
+        "row": 0,
+        "s": [
+          5,
+          0
+        ],
+        "e": [
+          5,
+          3
+        ],
+        "t": "unvoll-\nkommen,\ngeteilt"
+      },
+      {
+        "id": 13,
+        "col": 4,
+        "row": 2,
+        "s": [
+          5,
+          2
+        ],
+        "e": [
+          8,
+          2
+        ],
+        "t": "ital.\nMänner-\nname"
+      },
+      {
+        "id": 14,
+        "col": 4,
+        "row": 4,
+        "s": [
+          4,
+          5
+        ],
+        "e": [
+          4,
+          8
+        ],
+        "t": "Fluss in\nTirol und\nBayern"
+      },
+      {
+        "id": 15,
+        "col": 5,
+        "row": 4,
+        "s": [
+          6,
+          4
+        ],
+        "e": [
+          8,
+          4
+        ],
+        "t": "engl.\nfür\nBein"
+      },
+      {
+        "id": 16,
+        "col": 5,
+        "row": 6,
+        "s": [
+          6,
+          6
+        ],
+        "e": [
+          8,
+          6
+        ],
+        "t": "schlimm,\nübel"
+      },
+      {
+        "id": 17,
+        "col": 5,
+        "row": 8,
+        "s": [
+          6,
+          8
+        ],
+        "e": [
+          8,
+          8
+        ],
+        "t": "akustisch.\nSignal"
+      },
+      {
+        "id": 18,
+        "col": 6,
+        "row": 5,
+        "s": [
+          6,
+          6
+        ],
+        "e": [
+          6,
+          8
+        ],
+        "t": "Behörde"
+      },
+      {
+        "id": 19,
+        "col": 7,
+        "row": 0,
+        "s": [
+          6,
+          0
+        ],
+        "e": [
+          6,
+          4
+        ],
+        "t": "engl.\nfür\ngleich"
+      },
+      {
+        "id": 20,
+        "col": 7,
+        "row": 1,
+        "s": [
+          7,
+          2
+        ],
+        "e": [
+          7,
+          8
+        ],
+        "t": "ugs.:\nzum Wohl!\n(engl.)"
+      },
+      {
+        "id": 21,
+        "col": 8,
+        "row": 0,
+        "s": [
+          8,
+          1
+        ],
+        "e": [
+          8,
+          4
+        ],
+        "t": "Beute"
+      },
+      {
+        "id": 22,
+        "col": 8,
+        "row": 5,
+        "s": [
+          8,
+          6
+        ],
+        "e": [
+          8,
+          8
+        ],
+        "t": "Erbträger"
+      }
+    ],
+    "solutions": [
+      {
+        "id": 1,
+        "col": 3,
+        "row": 1
+      },
+      {
+        "id": 2,
+        "col": 6,
+        "row": 8
+      },
+      {
+        "id": 3,
+        "col": 5,
+        "row": 7
+      },
+      {
+        "id": 4,
+        "col": 4,
+        "row": 8
+      },
+      {
+        "id": 5,
+        "col": 8,
+        "row": 3
+      },
+      {
+        "id": 6,
+        "col": 3,
+        "row": 5
+      },
+      {
+        "id": 7,
+        "col": 2,
+        "row": 4
+      },
+      {
+        "id": 8,
+        "col": 1,
+        "row": 0
+      }
+    ],
+    "solved": [
+      ["", "G", "", "A", "", "H", "E", "", ""],
+      ["", "N", "A", "S", "D", "A", "Q", "", "F"],
+      ["", "A", "", "B", "", "L", "U", "C", "A"],
+      ["K", "E", "G", "E", "L", "B", "A", "H", "N"],
+      ["", "D", "A", "S", "", "", "L", "E", "G"],
+      ["", "I", "L", "T", "I", "S", "", "E", ""],
+      ["E", "G", "O", "", "S", "", "A", "R", "G"],
+      ["", "", "P", "R", "A", "E", "M", "I", "E"],
+      ["", "S", "P", "U", "R", "", "T", "O", "N"]
+    ],
+    "letters": [],
+    "import_file_date": "2025-10-03",
+    "import_file_time": "23:16:01:0",
+    "import_file_name": "fcs/spiegel/2025-10-20/14104_14165_spiegel_9x9_d4_DE/crossword_14111_raetsel4u_kr3m_spiegel_9x9_d4_DE.fcs",
+    "converted_file_date": "2025-10-22",
+    "converted_file_time": "13:46:06:1",
+    "licensed_for": "spiegel.de",
+    "words": 22,
+    "solution_word": "STERNTAG",
+    "empty_fields": 0,
+    "double_challenges": 0,
+    "converter_version": "0.0.11",
+    "supplier": "raetsel4u"
+  }
+}
