@@ -8,15 +8,14 @@ headers = {
     'x-games-auth-bypass': 'true'
 }
 
-# Spiegel changed their system. Maybe add it back later, but who cares
-#url = f"https://spiele.spiegel.de/games/spiegel_Crosswords/js/data/levels/c003/{current_date}_9x9.json?_=1.14.112"
-#folder = "spiegel"
-#os.makedirs(folder, exist_ok=True)
-#file_path = os.path.join(folder, f"{current_date}.json");
-#response = requests.get(url, headers=headers);
-#if response.status_code == 200:
-#    with open(file_path, 'w', encoding='utf-8') as f:
-#        f.write(response.text)
+url = f"https://api.spiegel.raetselzentrale.com/api/v3/l/spiegel/kreuzwortraetsel?channel=www.spiegel.de"
+folder = "spiegel"
+os.makedirs(folder, exist_ok=True)
+file_path = os.path.join(folder, f"{current_date}.json");
+response = requests.get(url, headers=headers);
+if response.status_code == 200:
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(response.text)
 
 suedeutsche_datetime = datetime.now().strftime("%Y%m%d");
 url = f"https://www.sueddeutsche.de/tools/spiele/kreuzwortraetsel/iframe?currentDate={suedeutsche_datetime}"
