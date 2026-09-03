@@ -31,7 +31,31 @@ if response.status_code == 200:
         f.write(response.text)
 
 url = "https://www.nytimes.com/svc/crosswords/v6/puzzle/mini.json"
-folder = "nyt"
+folder = "nyt/mini"
+
+os.makedirs(folder, exist_ok=True)
+file_path = os.path.join(folder, f"{current_date}.json");
+
+response = requests.get(url, headers=headers);
+
+if response.status_code == 200:
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(response.text)
+
+url = "https://www.nytimes.com/svc/crosswords/v6/puzzle/midi.json"
+folder = "nyt/midi"
+
+os.makedirs(folder, exist_ok=True)
+file_path = os.path.join(folder, f"{current_date}.json");
+
+response = requests.get(url, headers=headers);
+
+if response.status_code == 200:
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(response.text)
+
+url = "https://www.nytimes.com/svc/crosswords/v6/puzzle/daily.json"
+folder = "nyt/daily"
 
 os.makedirs(folder, exist_ok=True)
 file_path = os.path.join(folder, f"{current_date}.json");
